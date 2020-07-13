@@ -1,8 +1,8 @@
-var name = document.getElementsByName('fname');
-var weight = document.getElementById('gewicht');
-var activity = document.getElementsByName('sport');
-var activityTime = document.getElementById('duur');
-var submitButton = document.getElementById('button');
+const name = document.getElementById('fname');
+const weight = document.getElementById('gewicht');
+const activity = document.getElementsByName('sport');
+const activityTime = document.getElementById('duur');
+const submitButton = document.getElementById('button');
 
 const output = document.querySelector('.output');
 
@@ -10,7 +10,7 @@ let metValue;
 let burntKcal;
 
 const checkActivity = () => {
-    for (var i = 0; i < activity.length; i++) {
+    for (let i = 0; i < activity.length; i++) {
         if (activity[i].checked) {
 
           // do whatever you want with the checked radio
@@ -34,17 +34,21 @@ const calculateMet = () => {
     return metCalculated;
 }
 
+const printToDOM = (name, burntKcal) => {
+    output.innerHTML = ''
+    const pTag = document.createElement('p');
+    pTag.innerHTML = `Proficiat ${name}, je hebt ${Math.round(burntKcal)} kcal verbrand met je activiteit!`
+    output.appendChild(pTag);
+}
+
 submitButton.addEventListener('click', (ev) => {
-    ev.preventDefault();
+    ev.preventDefault();  
     checkActivity();
-    calculateMet();
 
     let metParMinute = calculateMet();
-
     burntKcal = metParMinute * parseInt(activityTime.value);
 
-    console.log(burntKcal);
-    console.log()
+    printToDOM(name.value, burntKcal);
 })
 
 
