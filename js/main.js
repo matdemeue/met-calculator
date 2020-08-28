@@ -54,11 +54,14 @@ const calculateMet = () => {
     return metCalculated;
 }
 
-const printToDOM = (name, burntKcal) => {
-    output.innerHTML = ''
-    const pTag = document.createElement('p');
-    pTag.innerHTML = `Proficiat, je hebt ${Math.round(burntKcal)} kcal verbrand met je activiteit!`
-    output.appendChild(pTag);
+const printToDOM = (burntKcal) => {
+    // output.innerHTML = ''
+    // const pTag = document.createElement('p');
+    // pTag.innerHTML = `Proficiat, je hebt ${Math.round(burntKcal)} kcal verbrand met je activiteit!`
+    // output.appendChild(pTag);
+
+    const text = `Proficiat, je hebt ${Math.round(burntKcal)} kcal verbrand met je activiteit!`;
+    window.alert(text);
 }
 
 submitButton.addEventListener('click', (ev) => {
@@ -68,5 +71,11 @@ submitButton.addEventListener('click', (ev) => {
     let metParMinute = calculateMet();
     burntKcal = metParMinute * parseInt(activityTime.value);
 
-    printToDOM(name.value, burntKcal);
+    console.log(burntKcal);
+
+    if (burntKcal) {
+        printToDOM(burntKcal);
+    } else {
+        window.alert("Gelieve eerst de velden in te vullen!")
+    }
 })
